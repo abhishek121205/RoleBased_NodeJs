@@ -9,20 +9,21 @@
 
 <body class="bg-dark">
     <%- include('./partials/header.ejs') -%>
-        <div class="container">
-            <h2 class="text-white">Category List</h2>
-            <span class="text-light">Add category through Postman</span>
+        <div class="container py-4">
+            <h2 class="text-white">Category We Have</h2>
+            <span class="text-light">Add category through Postman/Thunderclient</span>
             <div class="container">
                 <ul class="p-0 mt-4">
                     <% catData.map((val)=>{ %>
                         <li class="text-white py-1" style="font-size: 20px;">
-                            <%= val.CatName %> <a class="btn btn-danger px-3 py-0" href="/category/deleteCat/<%= val._id %>">DELETE</a> <a href="#"
+                            <%= val.CatName %> <% if(decoded.role == "ADMIN") {%><a class="btn btn-danger px-3 py-0" href="/category/deleteCat/<%= val._id %>">DELETE</a> <a href="#"
                                     type="button" class="btn btn-warning px-3 py-0" data-bs-toggle="modal"
                                     data-bs-target="#edit<%= val._id %>">
                                     <span class="text-light fw-semibold">
                                         EDIT
                                     </span>
                                 </a>
+                                <% } %>
                         </li>
                         <% }) %>
                 </ul>

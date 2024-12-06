@@ -12,17 +12,18 @@
         <div class="container py-4">
             <div class="row">
                 <% proData.map((val)=>{ %>
-                    <div class="col-4">
+                    <div class="col-12 col-md-6 col-lg-4">
                         <div class="card dataInfo border p-2" style="background-color:rgba(225,225,225,0.8);">
                             <h3>
                                 <%= val.proName %>
                             </h3>
-                            <p class="my-0" style="font-size:20px">
+                            <p class="my-0 overflow-hidden text-wrap" style="font-size:20px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 4rem; overflow: hidden;">
                                 <%= val.proDescription %>
                             </p>
-                            <span class="mt-2" style="display: block; font-size:19px">
-                                <%= val.proPrice %>
+                            <span class="mt-2 text-danger" style="display: block; font-size:19px">
+                                $<%= val.proPrice %>
                             </span>
+                            <% if(decoded.role == "ADMIN"){ %>
                             <a href="/product/delete/<%= val._id %>" class="btn btn-danger my-2">Delete</a>
                             <a href="#" type="button" class="btn btn-warning py-1 px-3" data-bs-toggle="modal"
                                 data-bs-target="#edit<%= val._id %>">
@@ -30,6 +31,10 @@
                                     EDIT
                                 </span>
                             </a>
+                            <% } %>
+                            <% if(decoded.role == "USER"){ %>
+                                <button class="mt-2 btn btn-primary">Add To Cart</button>
+                            <% } %>
                         </div>
                     </div>
                     <% }) %>

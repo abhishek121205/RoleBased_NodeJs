@@ -5,12 +5,21 @@ const jwt = require("jsonwebtoken");
 const addProduct = async (req, res) => {
   // const { proName, proDescription, proPrice } = req.body;
   try {
+    let { token } = req.cookies;
+    var decoded = jwt.verify(token, "it's private");
+
+    if (decoded.role != "ADMIN") throw new Error("You are not admin");
+
     await product.create(req.body).then((data) => {
       console.log("data inserted");
       return res.redirect("back");
     });
+
   } catch (error) {
-    console.log(error);
+    res.json({
+      message: error.message || error,
+      error: true
+    })
   }
 };
 
@@ -25,11 +34,20 @@ const productData = async (req, res) => {
 const deleteData = async (req, res) => {
   let id = req.params.id;
   try {
+    let { token } = req.cookies;
+    var decoded = jwt.verify(token, "it's private");
+
+    if (decoded.role != "ADMIN") throw new Error("You are not admin");
+
     await product.findByIdAndDelete(id);
     console.log("Data deleted");
     return res.redirect("back");
+  
   } catch (error) {
-    console.log(error);
+    res.json({
+      message: error.message || error,
+      error: true
+    })
   }
 };
 
@@ -42,7 +60,7 @@ const updateData = async (req, res) => {
       proDescription,
       proPrice,
       catId,
-    }).then(()=>{
+    }).then(() => {
       console.log("Data Updated");
     })
     return res.redirect("back");
