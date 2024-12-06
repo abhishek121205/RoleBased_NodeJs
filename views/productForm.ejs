@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body class="bg-dark">
+    <%- include('./partials/header.ejs') -%>
+        <div class="container py-3">
+            <div class="row justify-content-center" style="position: relative;">
+                <div class="col-6">
+                    <div class="form-content p-3"
+                        style="border-radius: 10px; background-color: rgba(225 ,225 ,225 ,0.4 );">
+                        <h2 class="text-center text-white">Add Product </h2>
+                        <form action="/product/addProduct" method="post" id="form">
+                            <input type="text" name="proName" placeholder="Enter product Name" id="proName"
+                                class="form-control border border-0"
+                                style="font-size: 20px; border-radius: 10px; background-color: rgba(225 ,225 ,225 ,0.4 );"
+                                required>
+                            <textarea name="proDescription" id="proDescription" placeholder="Enter product Description"
+                                style="border-radius: 10px; background-color: rgba(225 ,225 ,225 ,0.4 ); font-size: 20px;"
+                                class="my-2 form-control border border-0" required></textarea>
+                            <input type="text" name="proPrice" id="proPrice" placeholder="Enter product Price"
+                                style="font-size: 20px; border-radius: 10px; background-color: rgba(225 ,225 ,225 ,0.4 );"
+                                class="form-control border border-0" required>
+                            <select name="catId" id="catId" class="form-control my-2 border border-0"
+                                style="font-size: 20px; border-radius: 10px; background-color: rgba(225 ,225 ,225 ,0.4 );"
+                                required>
+                                <option value="" disabled selected>--select category--</option>
+                                <% catData.map((val)=>{ %>
+                                    <option value="<%= val.id %>">
+                                        <%= val.CatName %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <input type="submit" name="" id="type" value="ADD" style="font-size: 20px;"
+                                class="border form-control btn-success btn">
+                        </form>
+                        <a href="/" class="text-white">Go Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
