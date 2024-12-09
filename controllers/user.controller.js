@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
 const login = async (req, res) => {
   const { UserName, password } = req.body;
   let User = await user.findOne({ UserName: UserName });
-  console.log(User);
+  // console.log(User);
   if (User) {
     const match = await bcrypt.compare(password, User.password);
     if (match) {
